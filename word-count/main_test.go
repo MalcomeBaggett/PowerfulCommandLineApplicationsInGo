@@ -5,10 +5,19 @@ import (
 	"testing"
 )
 
-func TestWordCount(t *testing.T){
-	b := bytes.NewBufferString("word1 word2 word3 word4\n")
+func TestWordCount(t *testing.T) {
+	b := bytes.NewBufferString("word1 word2 word3 word4\n\n\n\n")
 	expected := 4
-	res := count(b)
+	res := count(b, false)
+	if res != expected {
+		t.Errorf("Expected %d, got %d instead\n", expected, res)
+	}
+}
+
+func TestLineCount(t *testing.T) {
+	b := bytes.NewBufferString("word1 word2 word3 word4\n\n\n\n")
+	expected := 4
+	res := count(b, true)
 	if res != expected {
 		t.Errorf("Expected %d, got %d instead\n", expected, res)
 	}
