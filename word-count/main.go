@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func count(r io.Reader, lines bool) int {
+func count(r io.Reader, lines bool, bytes bool) int {
 
 	// A scanner is used to read text from a Reader (such as files)
 	scanner := bufio.NewScanner(r)
@@ -17,6 +17,10 @@ func count(r io.Reader, lines bool) int {
 	// otherwise split into lines
 	if !lines {
 		scanner.Split(bufio.ScanWords)
+	}
+
+	if bytes{
+		scanner.Split(bufio.ScanBytes)
 	}
 
 	// Define a counter
@@ -30,5 +34,6 @@ func count(r io.Reader, lines bool) int {
 func main() {
 	// Defining a boolean flag -l to count lines
 	lines := flag.Bool("l", false, "Count lines")
-	fmt.Println(count(os.Stdin, *lines))
+	bytes := flag.Bool("b", false, "Count bytes")
+	fmt.Println(count(os.Stdin, *lines, *bytes))
 }
