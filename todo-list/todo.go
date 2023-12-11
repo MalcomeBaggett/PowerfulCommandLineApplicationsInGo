@@ -29,7 +29,7 @@ func (l *List) Add(task string) {
 }
 
 // Complete method marks a todo as as completed
-func (l *List) Completed(i int) error {
+func (l *List) Complete(i int) error {
 	ls := *l
 	if i <= 0 || i > len(ls) {
 		return fmt.Errorf("item %d does not exist", i)
